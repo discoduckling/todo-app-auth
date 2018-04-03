@@ -1,25 +1,14 @@
 const express = require('express');
 const passport = require('passport');
-const Auth0Strategy = require('passport-auth0');
+require('./services/passport');
 
 app = express();
 
-const auth0Strategy = new Auth0Strategy({
-    domain: 'https://todo-app-discoduckling.auth0.com',
-    clientID: 'vtVB02OQFeazAgpLDx_3TbgOHe8pzVAS',
-    clientSecret: 'E88a-S2nNAQ5ZMV-B_K7DfTfx3QZKBFuVZYB1kg9YkQH1VNZcC-ZcIK9yHlaYAGb',
-    callbackURL: '/auth/auth0/callback'
-});
 
-passport.use(auth0Strategy);
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.get('/auth/auth0/callback', passport.authenticate('auth0', (req, res) => {
-    res.send('login successful');
-}));
-
-// app.get('/', (req, res) => {
-//     res.send({hi: 'there'});
-// })
+require('./routes/authRoutes')(app);
 
 const PORT = process.env.PORT || 5000;
 
