@@ -7,7 +7,8 @@ module.exports = app => {
         passport.authenticate('auth0', {
             failureRedirect: '/'
         }), (req, res) => {
-            res.redirect('/');
+            // res.redirect('/');
+            res.send(req.user);
         });
 
     app.get('/login', passport.authenticate('auth0', {
@@ -16,9 +17,10 @@ module.exports = app => {
         redirectUri: keys.CALLBACK_URL,
         audience: 'https://' + keys.AUTH0_DOMAIN + '/userinfo',
         responseType: 'code',
-        scope: 'openid'
+        scope: 'openid profile'
     }, (req, res) => {
-        res.redirect('/')
+        // res.redirect('/');
+        res.send(req.user);
     }))
 
     app.get('/logout', (req, res) => {
