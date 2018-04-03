@@ -3,7 +3,7 @@ const keys = require('../config/keys');
 
 module.exports = app => {
     app.get(
-        '/auth/auth0/callback',
+        keys.CALLBACK_URL,
         passport.authenticate('auth0', {
             failureRedirect: '/'
         }), (req, res) => {
