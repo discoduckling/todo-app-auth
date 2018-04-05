@@ -7,23 +7,21 @@ module.exports = app => {
         passport.authenticate('auth0', {
             failureRedirect: '/'
         }), (req, res) => {
-            // res.redirect('/');
-            res.send(req.user);
+            console.log(req.user);
+            res.redirect('/');
+            // res.send(req.user);
         });
 
-    app.get('/login', passport.authenticate('auth0', {
+    app.get('/auth/login', passport.authenticate('auth0', {
         clientID: keys.CLIENT_ID_AUTH0,
         domain: keys.AUTH0_DOMAIN,
         redirectUri: keys.CALLBACK_URL,
         audience: 'https://' + keys.AUTH0_DOMAIN + '/userinfo',
         responseType: 'code',
         scope: 'openid profile'
-    }, (req, res) => {
-        // res.redirect('/');
-        res.send(req.user);
     }))
 
-    app.get('/logout', (req, res) => {
+    app.get('/auth/logout', (req, res) => {
         req.logout();
         res.redirect('/')
     });
