@@ -28,6 +28,6 @@ module.exports = app => {
 
 
     app.get('/', (req, res) => {
-        res.send({ hi: 'there' });
+        res.send({ hi: 'there', current: req.user ? req.user : 'none' });
     })
 }
