@@ -7,7 +7,7 @@ module.exports = app => {
         passport.authenticate('auth0', {
             failureRedirect: '/'
         }), (req, res) => {
-            console.log(req.user);
+            // console.log(req.user);
             res.redirect('/');
             // res.send(req.user);
         });
