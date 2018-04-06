@@ -15,7 +15,11 @@ class HeaderBar extends Component {
             case false:
                 return <a href='/auth/login'><Menu.Item name='login' link/></a>
             default:
-                return <a href='/auth/logout'><Menu.Item name='logout' link/></a>
+                return (
+                    <a href='/auth/logout'>
+                        <Menu.Item name='logout' link/>
+                    </a>
+                )
         }
     }
     render() {
@@ -23,15 +27,12 @@ class HeaderBar extends Component {
         return (
             <Menu>
                 <Menu.Item>
-                    Thing 1
-                </Menu.Item>
-                <Menu.Item>
-                    Thing 1
-                </Menu.Item>
-                <Menu.Item>
-                    Thing 1
+                    Home
                 </Menu.Item>
                 <Menu.Menu position='right'>
+                    <Menu.Item link>
+                        Todo List
+                    </Menu.Item>
                     {this.renderLogin()}
                 </Menu.Menu>
             </Menu>
