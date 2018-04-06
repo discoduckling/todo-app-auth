@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import HeaderBar from '../components/HeaderBar';
+import TodoList from './TodoList';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
@@ -11,6 +12,7 @@ class App extends Component {
     return (
       <div>
         <HeaderBar />
+        <TodoList />
       </div>
     );
   }

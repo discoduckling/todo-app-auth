@@ -21,7 +21,7 @@ class HeaderBar extends Component {
     render() {
         console.log(this.props);
         return (
-            <Menu stackable >
+            <Menu>
                 <Menu.Item>
                     Thing 1
                 </Menu.Item>
