@@ -5,6 +5,7 @@ export default (state=null, action) => {
         case FETCH_USER:
             // if user exists, return user data
             // if user isn't there, return false
+            console.log(action.payload);
             return action.payload || false;
         default:
             return state;

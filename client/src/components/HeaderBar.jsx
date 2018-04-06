@@ -1,19 +1,21 @@
 import { Menu } from 'semantic-ui-react';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import * as actions from '../actions';
 
 class HeaderBar extends Component {
     loginHandler = () => {
         console.log('login clicked');
+        this.props.loginUser();
     }
     renderLogin = () => {
         switch(this.props.auth) {
             case null:
                 return;
             case false:
-                return <Menu.Item name='login' onClick={this.loginHandler} />
+                return <a href='/auth/login'><Menu.Item name='login' link/></a>
             default:
-                return <Menu.Item name='logout' onClick={this.loginHandler} />
+                return <a href='/auth/logout'><Menu.Item name='logout' link/></a>
         }
     }
     render() {
@@ -41,4 +43,4 @@ const mapStateToProps = ({auth}) => {
     return { auth };
 }
 
-export default connect(mapStateToProps)(HeaderBar);
+export default connect(mapStateToProps, actions)(HeaderBar);
