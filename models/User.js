@@ -1,17 +1,10 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
+const todoSchema = require('./Todo');
 
 const userSchema = new Schema({
     googleId: String,
-    todos: [
-        {
-            content: String,
-            completed: {
-                type: Boolean,
-                default: false
-            }
-        }
-    ]
+    todos: [todoSchema]
 });
 
 mongoose.model('users', userSchema);

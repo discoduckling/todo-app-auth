@@ -4,7 +4,11 @@ const mongoose = require('mongoose');
 const keys = require('./config/keys');
 const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
+const axios = require('axios');
+
+require('./models/Todo');
 require('./models/User');
+
 
 mongoose.connect(keys.MONGO_URI);
 
@@ -24,6 +28,7 @@ app.use(passport.session());
 
 require('./routes/authRoutes')(app);
 require('./routes/apiRoutes')(app);
+
 
 if (process.env.NODE_ENV === 'production') {
     // Express will serve up production assets like our main.js or main.css file

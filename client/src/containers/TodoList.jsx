@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Table, Container, Button, Form, Modal, Header, Icon } from 'semantic-ui-react';
-
+import { connect } from 'react-redux';
+import * as actions from '../actions';
 class TodoList extends Component {
     state = {
         items: [
@@ -19,6 +20,10 @@ class TodoList extends Component {
         ],
         newText: '',
         open: false
+    }
+
+    componentDidMount() {
+        this.props.getTodos();
     }
     completeHandler = (e, data) => {
         const newItems = this.state.items.filter(item => item.id !== data.itemId);
@@ -50,28 +55,33 @@ class TodoList extends Component {
         this.setState({ open: true })
     };
     deleteAllItems = () => {
-        console.log('clicked');
         this.setState({
             open: false,
             items: []
         })
     }
+    testAdd = () => {
+        this.props.addTodo('new task');
+    }
     renderItems = () => {
-        const items = this.state.items.map(item => {
-            return (
-                <Table.Row>
-                    <Table.Cell>{item.task}</Table.Cell>
-                    <Table.Cell><Button floated='right' circular icon='checkmark' itemId={item.id} onClick={this.completeHandler}/></Table.Cell>
-                </Table.Row>
-            )
-        });
-
+        let items = null;
+        if (this.props.tasks) {
+            items = this.props.tasks.map(item => {
+                return (
+                    <Table.Row>
+                        <Table.Cell>{item.content}</Table.Cell>
+                        <Table.Cell><Button floated='right' circular icon='checkmark' itemId={item.id} onClick={this.completeHandler}/></Table.Cell>
+                    </Table.Row>
+                )
+            });
+        }
         return items;
     };
     render() {
         const {open} = this.state;
         return (
             <div>
+                <Button onClick={this.testAdd}>Test</Button>
                 <div className="test" style={{ width: '30rem', marginLeft: 'auto', marginRight: 'auto', marginTop: '5rem'}}>
                     <Modal open={open} basic size='mini' style={{ marginTop: '10%', marginLeft: 'auto', marginRight: 'auto'}}>
                         <Header icon='trash' content='Delete All Items' />
@@ -127,4 +137,8 @@ class TodoList extends Component {
     }
 };
 
-export default TodoList;
+const mapStateToProps = state => {
+    return {tasks: state.todos}
+}
+
+export default connect(mapStateToProps, actions)(TodoList);
