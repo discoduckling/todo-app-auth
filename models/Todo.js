@@ -2,8 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const todoSchema = new Schema({
-    content: String,
-    _user: req.user.id
+    content: String
 });
 
 module.exports = todoSchema;

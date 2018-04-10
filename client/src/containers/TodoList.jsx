@@ -4,20 +4,6 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 class TodoList extends Component {
     state = {
-        items: [
-            {
-                task: 'Walk the dog',
-                id: '1'
-            },
-            {
-                task: 'Make a sandwich',
-                id: '2'
-            },
-            {
-                task: 'Water the Plants',
-                id: '3'
-            },
-        ],
         newText: '',
         open: false
     }
@@ -35,16 +21,9 @@ class TodoList extends Component {
         this.setState({ newText: data.value });
     }
     onAddNewTask = () => {
-        const newTask = {
-            task: this.state.newText,
-            id: this.state.items.length
-        };
-
-        const newItems = [
-            ...this.state.items,
-            newTask
-        ];
-        this.setState({ items: newItems, newText: '' });
+        this.props.addTodo({ content: this.state.newText });
+        // this.props.addTodo({ content: 'new task' })
+        this.setState({ newText: '' });
     };
     onEnterPress = (key) => {
         if (key === 'Enter') {
@@ -60,8 +39,12 @@ class TodoList extends Component {
             items: []
         })
     }
-    testAdd = () => {
-        this.props.addTodo('new task');
+    taskAdd = () => {
+        // this.props.addTodo({ content: 'test task' });
+        this.props.addTodo({ content: this.state.newText });
+        this.setState({
+            newText: ''
+        })
     }
     renderItems = () => {
         let items = null;
@@ -79,9 +62,9 @@ class TodoList extends Component {
     };
     render() {
         const {open} = this.state;
+        // console.log(this.state);
         return (
             <div>
-                <Button onClick={this.testAdd}>Test</Button>
                 <div className="test" style={{ width: '30rem', marginLeft: 'auto', marginRight: 'auto', marginTop: '5rem'}}>
                     <Modal open={open} basic size='mini' style={{ marginTop: '10%', marginLeft: 'auto', marginRight: 'auto'}}>
                         <Header icon='trash' content='Delete All Items' />
@@ -118,7 +101,15 @@ class TodoList extends Component {
                                     </Form.Group>
                                 </Form>
                             </Table.Cell>
-                            <Table.Cell><Button floated='right' circular icon='add' color='purple' onClick={this.onAddNewTask}/></Table.Cell>
+                            <Table.Cell>
+                                <Button 
+                                    floated='right' 
+                                    circular icon='add' 
+                                    color='purple' 
+                                    // onClick={this.onAddNewTask}
+                                    onClick={this.taskAdd}
+                                />
+                            </Table.Cell>
                         </Table.Row>
                         <Table.Footer>
                             <Table.Row>

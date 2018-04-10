@@ -18,11 +18,6 @@ export const getTodos = () => async dispatch => {
 };
 
 export const addTodo = (text) => async dispatch => {
-    const res = await axios.post('/api/todos', {
-        body: {
-            text: text
-        }
-    });
-    console.log(JSON.parse(res.config.data));
+    const res = await axios.post('/api/todos', text);
     dispatch({ type: FETCH_TODOS, payload: res.data })
 };
