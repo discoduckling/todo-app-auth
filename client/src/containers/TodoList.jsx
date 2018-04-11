@@ -13,6 +13,10 @@ class TodoList extends Component {
     }
 
     componentDidMount() {
+        // console.log('updating');
+        this.props.getTodos();
+    }
+    componentWillReceiveProps(nextProps) {
         this.props.getTodos();
     }
     // completeHandler = (e, data) => {
@@ -65,26 +69,10 @@ class TodoList extends Component {
         return items;
     };
     render() {
-        // const {open} = this.state;
-        // console.log(this.state);
         return (
             <div>
                 <div className="test" style={{ width: '30rem', marginLeft: 'auto', marginRight: 'auto', marginTop: '5rem'}}>
                     <CancelModal open={this.state.open} closeModal={() => this.setState({ open: false })} />
-                    {/* <Modal open={open} basic size='mini' style={{ marginTop: '10%', marginLeft: 'auto', marginRight: 'auto'}}>
-                        <Header icon='trash' content='Delete All Items' />
-                        <Modal.Content>
-                            <p>Are you sure you want to delete all todo items?</p>
-                        </Modal.Content>
-                        <Modal.Actions>
-                            <Button basic color='red' inverted onClick={() => this.setState({open: false})}>
-                                <Icon name='remove' /> Cancel
-                            </Button>
-                            <Button color='green' inverted onClick={this.deleteAllItems}>
-                                <Icon name='checkmark'/> Delete All
-                            </Button>
-                        </Modal.Actions>
-                    </Modal> */}
                     <Table striped unstackable>
                         <Table.Header>
                             <Table.Row>
@@ -100,29 +88,19 @@ class TodoList extends Component {
                                 >
                                     <Field
                                         type='text'
-                                        name='new-todo'
+                                        name='content'
                                         component={TodoField}
                                     />
                                 </form>
-                                {/* <Form>
-                                    <Form.Group>
-                                        <Form.Input 
-                                            placeholder='New Task' 
-                                            onChange={this.onTextChange} 
-                                            value={this.state.newText}
-                                            onKeyPress={(e) => this.onEnterPress(e.key)}
-                                        />
-                                    </Form.Group>
-                                </Form> */}
                             </Table.Cell>
                             <Table.Cell>
-                                <Button 
+                                {/* <Button 
                                     floated='right' 
                                     circular icon='add' 
                                     color='purple' 
                                     // onClick={this.onAddNewTask}
                                     onClick={this.taskAdd}
-                                />
+                                /> */}
                             </Table.Cell>
                         </Table.Row>
                         <Table.Footer>

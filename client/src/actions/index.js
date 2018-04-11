@@ -17,7 +17,7 @@ export const getTodos = () => async dispatch => {
     dispatch({ type: FETCH_TODOS, payload: res.data })
 };
 
-export const addTodo = (text) => async dispatch => {
-    const res = await axios.post('/api/todos', text);
+export const addTodo = (values) => async dispatch => {
+    const res = await axios.post('/api/todos', values);
     dispatch({ type: FETCH_TODOS, payload: res.data })
 };

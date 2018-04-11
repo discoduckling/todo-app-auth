@@ -1,13 +1,12 @@
 import React from 'react';
 import { Form } from 'semantic-ui-react';
 
-const TodoField = () => {
+const TodoField = (props) => {
+    // console.log(props);
     return (
         <Form.Input
             placeholder='New Task'
-            // onChange={this.onTextChange}
-            // value={this.state.newText}
-            // onKeyPress={(e) => this.onEnterPress(e.key)}
+            {...props.input}
         />
     )
 }

@@ -32,7 +32,7 @@ class HeaderBar extends Component {
         }
     }
     render() {
-        console.log(this.props);
+        // console.log(this.props);
         return (
             <Menu>
                 <Menu.Item>
