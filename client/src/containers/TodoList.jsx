@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Table, Container, Button, Form, Modal, Header, Icon } from 'semantic-ui-react';
+import { Table, Button,  } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import * as actions from '../actions';
 import TodoField from '../components/TodoField';
+import CancelModal from '../components/ClearModal';
 
 class TodoList extends Component {
     state = {
@@ -14,41 +15,41 @@ class TodoList extends Component {
     componentDidMount() {
         this.props.getTodos();
     }
-    completeHandler = (e, data) => {
-        const newItems = this.state.items.filter(item => item.id !== data.itemId);
-        this.setState({
-            items: newItems
-        })
-    };
-    onTextChange = (e, data) => {
-        this.setState({ newText: data.value });
-    }
-    onAddNewTask = () => {
-        this.props.addTodo({ content: this.state.newText });
-        // this.props.addTodo({ content: 'new task' })
-        this.setState({ newText: '' });
-    };
-    onEnterPress = (key) => {
-        if (key === 'Enter') {
-            this.onAddNewTask();
-        }
-    };
-    clearAllHandler = () => {
-        this.setState({ open: true })
-    };
-    deleteAllItems = () => {
-        this.setState({
-            open: false,
-            items: []
-        })
-    }
-    taskAdd = () => {
-        // this.props.addTodo({ content: 'test task' });
-        this.props.addTodo({ content: this.state.newText });
-        this.setState({
-            newText: ''
-        })
-    }
+    // completeHandler = (e, data) => {
+    //     const newItems = this.state.items.filter(item => item.id !== data.itemId);
+    //     this.setState({
+    //         items: newItems
+    //     })
+    // };
+    // onTextChange = (e, data) => {
+    //     this.setState({ newText: data.value });
+    // }
+    // onAddNewTask = () => {
+    //     this.props.addTodo({ content: this.state.newText });
+    //     // this.props.addTodo({ content: 'new task' })
+    //     this.setState({ newText: '' });
+    // };
+    // onEnterPress = (key) => {
+    //     if (key === 'Enter') {
+    //         this.onAddNewTask();
+    //     }
+    // };
+    // clearAllHandler = () => {
+    //     this.setState({ open: true })
+    // };
+    // deleteAllItems = () => {
+    //     this.setState({
+    //         open: false,
+    //         items: []
+    //     })
+    // }
+    // taskAdd = () => {
+    //     // this.props.addTodo({ content: 'test task' });
+    //     this.props.addTodo({ content: this.state.newText });
+    //     this.setState({
+    //         newText: ''
+    //     })
+    // }
     renderItems = () => {
         let items = null;
         if (this.props.tasks) {
@@ -64,12 +65,13 @@ class TodoList extends Component {
         return items;
     };
     render() {
-        const {open} = this.state;
+        // const {open} = this.state;
         // console.log(this.state);
         return (
             <div>
                 <div className="test" style={{ width: '30rem', marginLeft: 'auto', marginRight: 'auto', marginTop: '5rem'}}>
-                    <Modal open={open} basic size='mini' style={{ marginTop: '10%', marginLeft: 'auto', marginRight: 'auto'}}>
+                    <CancelModal open={this.state.open} closeModal={() => this.setState({ open: false })} />
+                    {/* <Modal open={open} basic size='mini' style={{ marginTop: '10%', marginLeft: 'auto', marginRight: 'auto'}}>
                         <Header icon='trash' content='Delete All Items' />
                         <Modal.Content>
                             <p>Are you sure you want to delete all todo items?</p>
@@ -82,7 +84,7 @@ class TodoList extends Component {
                                 <Icon name='checkmark'/> Delete All
                             </Button>
                         </Modal.Actions>
-                    </Modal>
+                    </Modal> */}
                     <Table striped unstackable>
                         <Table.Header>
                             <Table.Row>
@@ -129,7 +131,7 @@ class TodoList extends Component {
                                     <Button floated='left' size='small' color='green'>Save</Button>
                                 </Table.HeaderCell>
                                 <Table.HeaderCell>
-                                    <Button floated='right' size='small' color='red' onClick={this.clearAllHandler}>Clear All</Button>
+                                    <Button floated='right' size='small' color='red' onClick={() => this.setState({ open: true })}>Clear All</Button>
                                 </Table.HeaderCell>
                             </Table.Row>
                         </Table.Footer>
