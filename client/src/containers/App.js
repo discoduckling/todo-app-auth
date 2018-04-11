@@ -3,6 +3,7 @@ import HeaderBar from '../components/HeaderBar';
 import TodoList from './TodoList';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
+import { BrowserRouter, Route } from 'react-router-dom';
 
 class App extends Component {
   componentDidMount() {
@@ -11,8 +12,12 @@ class App extends Component {
   render() {
     return (
       <div>
-        <HeaderBar />
-        <TodoList />
+        <BrowserRouter>
+          <div>
+            <HeaderBar />
+            <Route exact path='/todo_list' component={TodoList} />
+          </div>
+        </BrowserRouter>
       </div>
     );
   }

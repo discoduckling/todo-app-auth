@@ -2,10 +2,10 @@ import { Menu } from 'semantic-ui-react';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
+import { Link } from 'react-router-dom';
 
 class HeaderBar extends Component {
     loginHandler = () => {
-        console.log('login clicked');
         this.props.loginUser();
     }
     renderLogin = () => {
@@ -13,9 +13,22 @@ class HeaderBar extends Component {
             case null:
                 return;
             case false:
-                return <a href='/auth/login'><Menu.Item name='login' link/></a>
+                return (
+                    <Menu.Menu position='right'>
+                        <a href='/auth/login'><Menu.Item name='login' link/></a>
+                    </Menu.Menu>
+                )
             default:
-                return <a href='/auth/logout'><Menu.Item name='logout' link/></a>
+                return (
+                    <Menu.Menu position='right'>
+                        <Menu.Item as={Link} to='/todo_list'>
+                            Todo List
+                        </Menu.Item>
+                        <a href='/auth/logout'>
+                            <Menu.Item name='logout' link/>
+                        </a>
+                    </Menu.Menu>
+                )
         }
     }
     render() {
@@ -23,17 +36,9 @@ class HeaderBar extends Component {
         return (
             <Menu>
                 <Menu.Item>
-                    Thing 1
+                    Home
                 </Menu.Item>
-                <Menu.Item>
-                    Thing 1
-                </Menu.Item>
-                <Menu.Item>
-                    Thing 1
-                </Menu.Item>
-                <Menu.Menu position='right'>
                     {this.renderLogin()}
-                </Menu.Menu>
             </Menu>
         )
     }
