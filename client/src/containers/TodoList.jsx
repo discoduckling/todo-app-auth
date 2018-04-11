@@ -80,9 +80,13 @@ class TodoList extends Component {
                                 <Table.HeaderCell />
                             </Table.Row>
                         </Table.Header>
-                        {this.renderItems()}
-                        <Table.Row fullWidth>
-                            <Table.Cell>
+
+                        <Table.Body>
+                            {this.renderItems()}
+                        
+                        
+                        <Table.Row>
+                            <Table.Cell colSpan='2'>
                                 <form
                                     onSubmit={this.props.handleSubmit(this.props.addTodo)}
                                 >
@@ -91,9 +95,17 @@ class TodoList extends Component {
                                         name='content'
                                         component={TodoField}
                                     />
+                                
+                                    {/* <Button 
+                                    floated='right' 
+                                    circular icon='add' 
+                                    color='purple' 
+                                    // onClick={this.onAddNewTask}
+                                    onClick={this.taskAdd}
+                                    /> */}
                                 </form>
                             </Table.Cell>
-                            <Table.Cell>
+                            {/* <Table.Cell> */}
                                 {/* <Button 
                                     floated='right' 
                                     circular icon='add' 
@@ -101,8 +113,9 @@ class TodoList extends Component {
                                     // onClick={this.onAddNewTask}
                                     onClick={this.taskAdd}
                                 /> */}
-                            </Table.Cell>
+                            {/* </Table.Cell> */}
                         </Table.Row>
+                        </Table.Body>
                         <Table.Footer>
                             <Table.Row>
                                 <Table.HeaderCell>

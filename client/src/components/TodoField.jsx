@@ -1,11 +1,13 @@
 import React from 'react';
-import { Form } from 'semantic-ui-react';
+import { Input } from 'semantic-ui-react';
 
 const TodoField = (props) => {
     // console.log(props);
     return (
-        <Form.Input
+        <Input
+            style={{ width: '100%' }}
             placeholder='New Task'
+            action={{ color: 'purple', labelPosition: 'right', icon: 'add', content: 'Add Task'}}
             {...props.input}
         />
     )
