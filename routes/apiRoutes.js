@@ -38,4 +38,19 @@ module.exports = app => {
             res.status(400).send(err);
         }
     })
+
+    app.delete('/api/todos', requireLogin, async (req, res) => {
+        const todoIds = [];
+        req.user.todos.forEach(todo => todoIds.push(todo.id));
+        todoIds.forEach(async todoId => {
+             await req.user.todos.pull({_id: mongoose.Types.ObjectId(todoId)});
+        })
+
+        try {
+            req.user.save();
+            res.send(req.user.todos);
+        } catch (err) {
+            res.status(400).send(err);
+        }
+    })
 };

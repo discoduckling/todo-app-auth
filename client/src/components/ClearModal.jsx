@@ -14,7 +14,7 @@ const ClearModal = (props) => {
                 <Button basic color='red' inverted onClick={props.closeModal}>
                     <Icon name='remove' /> Cancel
                 </Button>
-                <Button color='green' inverted onClick={props.closeModal}>
+                <Button color='green' inverted onClick={() => {props.deleteAll(); props.closeModal()}}>
                     <Icon name='checkmark'/> Delete All
                 </Button>
             </Modal.Actions>

@@ -19,23 +19,7 @@ class TodoList extends Component {
         console.log('newProps');
         this.props.getTodos();
     }
-    // completeHandler = (e, data) => {
-    //     const newItems = this.state.items.filter(item => item.id !== data.itemId);
-    //     this.setState({
-    //         items: newItems
-    //     })
-    // };
 
-    // onAddNewTask = () => {
-    //     this.props.addTodo({ content: this.state.newText });
-    //     // this.props.addTodo({ content: 'new task' })
-    //     this.setState({ newText: '' });
-    // };
-    // onEnterPress = (key) => {
-    //     if (key === 'Enter') {
-    //         this.onAddNewTask();
-    //     }
-    // };
     // clearAllHandler = () => {
     //     this.setState({ open: true })
     // };
@@ -70,7 +54,11 @@ class TodoList extends Component {
         return (
             <div>
                 <div className="test" style={{ width: '30rem', marginLeft: 'auto', marginRight: 'auto', marginTop: '5rem'}}>
-                    <CancelModal open={this.state.open} closeModal={() => this.setState({ open: false })} />
+                    <CancelModal 
+                        open={this.state.open} 
+                        closeModal={() => this.setState({ open: false })} 
+                        deleteAll={() => this.props.deleteAllTodos()}
+                        />
                     <Table striped unstackable>
                         <Table.Header>
                             <Table.Row>
@@ -81,8 +69,6 @@ class TodoList extends Component {
 
                         <Table.Body>
                             {this.renderItems()}
-                        
-                        
                         <Table.Row>
                             <Table.Cell colSpan='2'>
                                 <form
@@ -100,7 +86,7 @@ class TodoList extends Component {
                         <Table.Footer>
                             <Table.Row>
                                 <Table.HeaderCell>
-                                    <Button floated='right' size='small' color='red' onClick={() => this.setState({ open: true })}>Clear All</Button>
+                                    <Button size='small' color='red' onClick={() => this.setState({ open: true })}>Clear All</Button>
                                 </Table.HeaderCell>
                                 <Table.HeaderCell>
                                     

@@ -7,9 +7,7 @@ module.exports = app => {
         passport.authenticate('auth0', {
             failureRedirect: '/'
         }), (req, res) => {
-            // console.log(req.user);
-            res.redirect('/');
-            // res.send(req.user);
+            res.redirect('/todo_list');
         });
 
     app.get('/auth/login', passport.authenticate('auth0', {
@@ -25,9 +23,4 @@ module.exports = app => {
         req.logout();
         res.redirect('/')
     });
-
-
-    // app.get('/', (req, res) => {
-    //     res.send({ hi: 'there', current: req.user ? req.user : 'none' });
-    // })
 }
