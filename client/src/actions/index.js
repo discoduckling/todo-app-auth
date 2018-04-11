@@ -21,3 +21,9 @@ export const addTodo = (values) => async dispatch => {
     const res = await axios.post('/api/todos', values);
     dispatch({ type: FETCH_TODOS, payload: res.data })
 };
+
+export const deleteTodo = (todo_id) => async dispatch => {
+    // console.log(todo_id);
+    const res = await axios.delete(`/api/todos/${todo_id}`);
+    dispatch({ type: FETCH_TODOS, payload: res.data })
+}
