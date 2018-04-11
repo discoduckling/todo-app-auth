@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { Table, Container, Button, Form, Modal, Header, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
+import { reduxForm, Field } from 'redux-form';
 import * as actions from '../actions';
+import TodoField from '../components/TodoField';
+
 class TodoList extends Component {
     state = {
         newText: '',
@@ -90,7 +93,16 @@ class TodoList extends Component {
                         {this.renderItems()}
                         <Table.Row fullWidth>
                             <Table.Cell>
-                                <Form>
+                                <form
+                                    onSubmit={this.props.handleSubmit(this.props.addTodo)}
+                                >
+                                    <Field
+                                        type='text'
+                                        name='new-todo'
+                                        component={TodoField}
+                                    />
+                                </form>
+                                {/* <Form>
                                     <Form.Group>
                                         <Form.Input 
                                             placeholder='New Task' 
@@ -99,7 +111,7 @@ class TodoList extends Component {
                                             onKeyPress={(e) => this.onEnterPress(e.key)}
                                         />
                                     </Form.Group>
-                                </Form>
+                                </Form> */}
                             </Table.Cell>
                             <Table.Cell>
                                 <Button 
@@ -132,4 +144,6 @@ const mapStateToProps = state => {
     return {tasks: state.todos}
 }
 
-export default connect(mapStateToProps, actions)(TodoList);
+export default connect(mapStateToProps, actions)(reduxForm({
+    form: 'add-todo'
+})(TodoList));
