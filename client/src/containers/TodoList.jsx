@@ -20,16 +20,6 @@ class TodoList extends Component {
         this.props.getTodos();
     }
 
-    // clearAllHandler = () => {
-    //     this.setState({ open: true })
-    // };
-    // deleteAllItems = () => {
-    //     this.setState({
-    //         open: false,
-    //         items: []
-    //     })
-    // }
-
     renderItems = () => {
         let items = null;
         if (this.props.tasks) {
@@ -53,7 +43,7 @@ class TodoList extends Component {
     render() {
         return (
             <div>
-                <div className="test" style={{ width: '30rem', marginLeft: 'auto', marginRight: 'auto', marginTop: '5rem'}}>
+                <div style={{ width: '30rem', marginLeft: 'auto', marginRight: 'auto', marginTop: '5rem'}}>
                     <CancelModal 
                         open={this.state.open} 
                         closeModal={() => this.setState({ open: false })} 

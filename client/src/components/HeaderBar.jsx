@@ -15,17 +15,17 @@ class HeaderBar extends Component {
             case false:
                 return (
                     <Menu.Menu position='right'>
-                        <a href='/auth/login'><Menu.Item name='login' link/></a>
+                        <a href='/auth/login'><Menu.Item name='login' link style={{ color: 'white' }}/></a>
                     </Menu.Menu>
                 )
             default:
                 return (
-                    <Menu.Menu position='right'>
-                        <Menu.Item as={Link} to='/todo_list'>
+                    <Menu.Menu position='right' >
+                        <Menu.Item as={Link} to='/todo_list' style={{ color: 'white' }}>
                             Todo List
                         </Menu.Item>
                         <a href='/auth/logout'>
-                            <Menu.Item name='logout' link/>
+                            <Menu.Item name='logout' link style={{ color: 'white' }}/>
                         </a>
                     </Menu.Menu>
                 )
@@ -34,9 +34,12 @@ class HeaderBar extends Component {
     render() {
         // console.log(this.props);
         return (
-            <Menu>
-                <Menu.Item>
-                    Home
+            <Menu compact style={{ backgroundColor: 'rgba(255,255,255,.3)' }}>
+                <Menu.Item as={Link} to='/'>
+                    <div id='logo'>Another Todo App</div>
+                </Menu.Item>
+                <Menu.Item as={Link} to='/about' style={{ color: 'white' }}>
+                    About
                 </Menu.Item>
                     {this.renderLogin()}
             </Menu>
